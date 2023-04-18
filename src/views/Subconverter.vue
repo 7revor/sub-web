@@ -4,7 +4,7 @@
       <el-col>
         <el-card>
           <div slot="header">
-            7revor Subscription Converter
+            Subscription Converter
             <svg-icon icon-class="github" style="margin-left: 12px; cursor: pointer" @click="goToProject" />
             <div style="display: inline-block; position: absolute; right: 20px">
               {{ backendVersion }}
