@@ -5,8 +5,11 @@
         <el-card>
           <div slot="header">
             7revor Subscription Converter
-            <svg-icon icon-class="github" style="margin-left: 20px" @click="goToProject" />
-            <div style="display: inline-block; position: absolute; right: 20px">{{ backendVersion }}</div>
+            <svg-icon icon-class="github" style="margin-left: 12px; cursor: pointer" @click="goToProject" />
+            <div style="display: inline-block; position: absolute; right: 20px">
+              {{ backendVersion }}
+              <svg-icon icon-class="github" style="margin-left: 12px; cursor: pointer" @click="goToBackendProject" />
+            </div>
           </div>
           <el-container>
             <el-form :model="form" label-width="80px" label-position="left" style="width: 100%">
@@ -30,14 +33,22 @@
               </el-form-item>
 
               <el-form-item label="后端地址:">
-                <el-autocomplete
+                <el-select v-model="form.customBackend" allow-create placeholder="请选择" style="width: 100%">
+                  <el-option
+                    v-for="item in options.backendOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  />
+                </el-select>
+                <!-- <el-autocomplete
                   style="width: 100%"
                   v-model="form.customBackend"
                   :fetch-suggestions="backendSearch"
                   placeholder="动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?"
                 >
                   <el-button slot="append" @click="gotoGayhub" icon="el-icon-link">前往项目仓库</el-button>
-                </el-autocomplete>
+                </el-autocomplete> -->
               </el-form-item>
               <el-form-item label="远程配置:">
                 <el-select v-model="form.remoteConfig" allow-create filterable placeholder="请选择" style="width: 100%">
@@ -150,6 +161,7 @@
 
 <script>
 const project = process.env.VUE_APP_PROJECT;
+const backendProject = process.env.VUE_APP_BACKEND_PROJECT;
 const gayhubRelease = process.env.VUE_APP_BACKEND_RELEASE;
 const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/sub?";
 const defaultConfig = process.env.VUE_APP_SUBCONVERTER_DEFAULT_CONFIG;
@@ -177,13 +189,13 @@ export default {
           ClashR: "clashr",
           Surge2: "surge&ver=2",
         },
-        backendOptions: [{ value: "http://127.0.0.1:25500/sub?" }],
+        backendOptions: [{ label: "https://aws.7revor.com/subconverter/sub?（三网优化）", value: defaultBackend }],
         remoteConfig: [
           {
-            label: "Customized",
+            label: "CUSTOMIZED",
             options: [
               {
-                label: "7revor 自用",
+                label: "7revor（自用）",
                 value: "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.config.ini",
               },
             ],
@@ -318,7 +330,6 @@ export default {
   },
   mounted() {
     this.form.clientType = "clash";
-    this.notify();
     this.getBackendVersion();
   },
   methods: {
@@ -327,6 +338,9 @@ export default {
     },
     goToProject() {
       window.open(project);
+    },
+    goToBackendProject() {
+      window.open(backendProject);
     },
     gotoGayhub() {
       window.open(gayhubRelease);
@@ -416,26 +430,6 @@ export default {
 
       this.$copyText(this.customSubUrl);
       this.$message.success("定制订阅已复制到剪贴板");
-    },
-    notify() {
-      const h = this.$createElement;
-
-      this.$notify({
-        title: "隐私提示",
-        type: "warning",
-        message: h(
-          "i",
-          { style: "color: teal" },
-          "各种订阅链接（短链接服务除外）生成纯前端实现，无隐私问题。默认提供后端转换服务，隐私担忧者请自行搭建后端服务。"
-        ),
-      });
-    },
-    backendSearch(queryString, cb) {
-      let backends = this.options.backendOptions;
-      let results = queryString ? backends.filter(this.createFilter(queryString)) : backends;
-
-      // 调用 callback 返回建议列表的数据
-      cb(results);
     },
     createFilter(queryString) {
       return (candidate) => {
