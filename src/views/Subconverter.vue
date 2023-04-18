@@ -6,11 +6,14 @@
           <div slot="header">
             Subscription Converter
             <svg-icon icon-class="github" style="margin-left: 20px" @click="goToProject" />
-
             <div style="display: inline-block; position: absolute; right: 20px">{{ backendVersion }}</div>
           </div>
           <el-container>
             <el-form :model="form" label-width="80px" label-position="left" style="width: 100%">
+              <el-form-item label="模式设置:">
+                <el-radio v-model="advanced" label="1">基础模式</el-radio>
+                <el-radio v-model="advanced" label="2">进阶模式</el-radio>
+              </el-form-item>
               <el-form-item label="订阅链接:">
                 <el-input
                   v-model="form.sourceSubUrl"
@@ -26,35 +29,29 @@
                 </el-select>
               </el-form-item>
 
-              <div>
-                <el-form-item label="后端地址:">
-                  <el-autocomplete
-                    style="width: 100%"
-                    v-model="form.customBackend"
-                    :fetch-suggestions="backendSearch"
-                    placeholder="动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?"
-                  >
-                    <el-button slot="append" @click="gotoGayhub" icon="el-icon-link">前往项目仓库</el-button>
-                  </el-autocomplete>
-                </el-form-item>
-                <el-form-item label="远程配置:">
-                  <el-select
-                    v-model="form.remoteConfig"
-                    allow-create
-                    filterable
-                    placeholder="请选择"
-                    style="width: 100%"
-                  >
-                    <el-option-group v-for="group in options.remoteConfig" :key="group.label" :label="group.label">
-                      <el-option
-                        v-for="item in group.options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                      ></el-option>
-                    </el-option-group>
-                  </el-select>
-                </el-form-item>
+              <el-form-item label="后端地址:">
+                <el-autocomplete
+                  style="width: 100%"
+                  v-model="form.customBackend"
+                  :fetch-suggestions="backendSearch"
+                  placeholder="动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?"
+                >
+                  <el-button slot="append" @click="gotoGayhub" icon="el-icon-link">前往项目仓库</el-button>
+                </el-autocomplete>
+              </el-form-item>
+              <el-form-item label="远程配置:">
+                <el-select v-model="form.remoteConfig" allow-create filterable placeholder="请选择" style="width: 100%">
+                  <el-option-group v-for="group in options.remoteConfig" :key="group.label" :label="group.label">
+                    <el-option
+                      v-for="item in group.options"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    ></el-option>
+                  </el-option-group>
+                </el-select>
+              </el-form-item>
+              <div v-if="advanced === '2'">
                 <el-form-item label="Include:">
                   <el-input v-model="form.includeRemarks" placeholder="节点名包含的关键字，支持正则" />
                 </el-form-item>
@@ -162,7 +159,7 @@ export default {
       backendVersion: "",
       // 是否为 PC 端
       isPC: true,
-
+      advanced: "1",
       options: {
         clientTypes: {
           Clash: "clash",
@@ -375,21 +372,21 @@ export default {
       if (this.form.appendType) {
         this.customSubUrl += "&append_type=" + this.form.appendType.toString();
       }
-
-      this.customSubUrl +=
-        "&emoji=" +
-        this.form.emoji.toString() +
-        "&list=" +
-        this.form.nodeList.toString() +
-        "&tfo=" +
-        this.form.tfo.toString() +
-        "&scv=" +
-        this.form.scv.toString() +
-        "&fdn=" +
-        this.form.fdn.toString() +
-        "&sort=" +
-        this.form.sort.toString();
-
+      if (this.advanced === "2") {
+        this.customSubUrl +=
+          "&emoji=" +
+          this.form.emoji.toString() +
+          "&list=" +
+          this.form.nodeList.toString() +
+          "&tfo=" +
+          this.form.tfo.toString() +
+          "&scv=" +
+          this.form.scv.toString() +
+          "&fdn=" +
+          this.form.fdn.toString() +
+          "&sort=" +
+          this.form.sort.toString();
+      }
       if (this.needUdp) {
         this.customSubUrl += "&udp=" + this.form.udp.toString();
       }
@@ -402,7 +399,6 @@ export default {
         if (this.form.tpl.clash.doh === true) {
           this.customSubUrl += "&clash.doh=true";
         }
-
         this.customSubUrl += "&new_name=" + this.form.new_name.toString();
       }
 
