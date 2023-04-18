@@ -33,7 +33,13 @@
               </el-form-item>
 
               <el-form-item label="后端地址:">
-                <el-select v-model="form.customBackend" allow-create placeholder="请选择" style="width: 100%">
+                <el-select
+                  v-model="form.customBackend"
+                  allow-create
+                  filterable
+                  placeholder="请选择"
+                  style="width: 100%"
+                >
                   <el-option
                     v-for="item in options.backendOptions"
                     :key="item.value"
