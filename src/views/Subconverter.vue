@@ -4,7 +4,7 @@
       <el-col>
         <el-card>
           <div slot="header">
-            Subscription Converter
+            7revor Subscription Converter
             <svg-icon icon-class="github" style="margin-left: 20px" @click="goToProject" />
             <div style="display: inline-block; position: absolute; right: 20px">{{ backendVersion }}</div>
           </div>
@@ -186,14 +186,82 @@ export default {
                 label: "7revor 自用",
                 value: "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.config.ini",
               },
+            ],
+          },
+          {
+            label: "ACL4SSR",
+            options: [
               {
-                label: "ACL4SSR 默认",
+                label: "默认版",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini",
               },
               {
-                label: "ACL4SSR 去广告",
+                label: "去广告",
                 value:
                   "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_AdblockPlus.ini",
+              },
+              {
+                label: "多国分组",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_MultiCountry.ini",
+              },
+              {
+                label: "无自动测速",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoAuto.ini",
+              },
+              {
+                label: "无广告拦截",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoReject.ini",
+              },
+              {
+                label: "精简版",
+                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini",
+              },
+              {
+                label: "精简版去广告",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_AdblockPlus.ini",
+              },
+              {
+                label: "精简版无测速",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_NoAuto.ini",
+              },
+              {
+                label: "精简版故障转移",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_Fallback.ini",
+              },
+              {
+                label: "精简版(测速|故障转移|负载均衡)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_MultiMode.ini",
+              },
+              {
+                label: "精简版(港美日)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_MultiCountry.ini",
+              },
+              {
+                label: "全分组",
+                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini",
+              },
+              {
+                label: "全分组多模式",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_MultiMode.ini",
+              },
+              {
+                label: "全分组无测速",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini",
+              },
+              {
+                label: "全分组去广告",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_AdblockPlus.ini",
               },
             ],
           },
@@ -241,7 +309,7 @@ export default {
     };
   },
   created() {
-    document.title = "Subscription Converter";
+    document.title = "7revor Subscription Converter";
     this.isPC = this.$getOS().isPc;
     // 获取 url cache
     if (process.env.VUE_APP_USE_STORAGE === "true") {
