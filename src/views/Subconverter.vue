@@ -171,7 +171,8 @@ const project = process.env.VUE_APP_PROJECT;
 const backendProject = process.env.VUE_APP_BACKEND_PROJECT;
 const gayhubRelease = process.env.VUE_APP_BACKEND_RELEASE;
 const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/sub?";
-const defaultConfig = process.env.VUE_APP_SUBCONVERTER_DEFAULT_CONFIG;
+// const defaultConfig = process.env.VUE_APP_SUBCONVERTER_DEFAULT_CONFIG;
+const defaultConfig = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini";
 export default {
   data() {
     return {
