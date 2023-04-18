@@ -4,11 +4,12 @@
       <el-col>
         <el-card>
           <div slot="header">
-            Subscription Converter
-            <svg-icon icon-class="github" style="margin-left: 12px; cursor: pointer" @click="goToProject" />
-            <div style="display: inline-block; position: absolute; right: 20px">
+            <span @click="goToProject" style="cursor: pointer"> Subscription Converter </span>
+            <div
+              style="display: inline-block; position: absolute; right: 20px; cursor: pointer"
+              @click="goToBackendProject"
+            >
               {{ backendVersion }}
-              <svg-icon icon-class="github" style="margin-left: 12px; cursor: pointer" @click="goToBackendProject" />
             </div>
           </div>
           <el-container>
