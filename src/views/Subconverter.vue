@@ -329,7 +329,7 @@ export default {
     };
   },
   created() {
-    document.title = "7revor Subscription Converter";
+    document.title = "Subscription Converter";
     this.isPC = this.$getOS().isPc;
     // 获取 url cache
     if (process.env.VUE_APP_USE_STORAGE === "true") {
