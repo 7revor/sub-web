@@ -40,6 +40,6 @@ jobs:
         # target path on the server, must be a directory path.
         target: /deploy/sub-web
         # scp file list
-        source: dist/*
+        source: dist/index.html
         # remove target folder before upload data
         rm: true
