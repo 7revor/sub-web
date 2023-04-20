@@ -197,7 +197,7 @@ export default {
           ClashR: "clashr",
           Surge2: "surge&ver=2",
         },
-        backendOptions: [{ label: "https://aws.7revor.com/subconverter/sub?（三网优化）", value: defaultBackend }],
+        backendOptions: [{ label: "api.7revor.com（三网优化）", value: defaultBackend }],
         remoteConfig: [
           {
             label: "CUSTOMIZED",
