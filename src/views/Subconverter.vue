@@ -391,9 +391,6 @@ export default {
         "&insert=" +
         this.form.insert;
 
-      if (this.form.remoteConfig !== "") {
-        this.customSubUrl += "&config=" + encodeURIComponent(this.form.remoteConfig);
-      }
       if (this.form.excludeRemarks !== "") {
         this.customSubUrl += "&exclude=" + encodeURIComponent(this.form.excludeRemarks);
       }
@@ -434,6 +431,9 @@ export default {
           this.customSubUrl += "&clash.doh=true";
         }
         this.customSubUrl += "&new_name=" + this.form.new_name.toString();
+      }
+      if (this.form.remoteConfig !== "") {
+        this.customSubUrl += "&config=" + encodeURIComponent(this.form.remoteConfig);
       }
 
       this.$copyText(this.customSubUrl);
