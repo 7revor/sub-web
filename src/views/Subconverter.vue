@@ -3,7 +3,7 @@
     <el-row style="margin-top: 10px">
       <el-col>
         <el-card>
-          <div slot="header">
+          <div slot="header" class="header">
             <span @click="goToProject" style="cursor: pointer"> Subscription Converter </span>
             <div class="backend-container">
               <span
@@ -517,13 +517,14 @@ export default {
 </script>
 <style lang="css">
 .ping {
-  font-size: 12px;
   background-color: green;
   border-radius: 3px;
-  padding: 2px 4px;
+  padding: 4px;
   color: #fff;
-  margin-left: 8px;
+  margin-left: 4px;
   cursor: pointer;
+  line-height: 12px;
+  font-size: 12px;
 }
 .ping.normal {
   background-color: orange;
@@ -532,7 +533,13 @@ export default {
   background-color: red;
 }
 .backend-container {
+  font-size: 14px;
   display: flex;
-  float: right;
+  align-items: center;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>
