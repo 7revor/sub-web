@@ -484,7 +484,7 @@ export default {
       this.$axios
         .post(
           shortUrlBackend,
-          { target: this.customSubUrl },
+          { target: this.customSubUrl, reuse: true },
           {
             header: {
               "Content-Type": "application/json",
