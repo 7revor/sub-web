@@ -5,16 +5,18 @@
         <el-card>
           <div slot="header">
             <span @click="goToProject" style="cursor: pointer"> Subscription Converter </span>
-            <div
-              style="display: inline-block; position: absolute; right: 20px; cursor: pointer"
-              @click="goToBackendProject"
-            >
-              <span :style="{ color: ping === -1 ? 'red' : '#333' }">
+            <div class="backend-container">
+              <span
+                :style="{ color: ping === -1 ? 'red' : '#333' }"
+                style="cursor: pointer"
+                @click="goToBackendProject"
+              >
                 {{ backendVersion }}
               </span>
               <span
                 v-if="ping && ping !== -1"
-                :style="{ fontSize: '12px', color: ping < 1000 ? 'green' : ping < 3000 ? 'orange' : 'red' }"
+                :class="['ping', ping < 1000 ? 'good' : ping < 3000 ? 'normal' : 'bad']"
+                @click="getBackendVersion"
               >
                 {{ ping }}ms
               </span>
@@ -513,3 +515,18 @@ export default {
   },
 };
 </script>
+<style lang="css">
+.ping {
+  font-size: 12px;
+  background-color: green;
+  border-radius: 3px;
+  padding: 2px 4px;
+  color: #fff;
+  margin-left: 8px;
+  cursor: pointer;
+}
+.backend-container {
+  display: flex;
+  float: right;
+}
+</style>
