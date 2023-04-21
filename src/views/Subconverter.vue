@@ -525,6 +525,12 @@ export default {
   margin-left: 8px;
   cursor: pointer;
 }
+.ping.normal {
+  background-color: orange;
+}
+.ping.bad {
+  background-color: red;
+}
 .backend-container {
   display: flex;
   float: right;
