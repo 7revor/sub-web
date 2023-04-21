@@ -9,7 +9,15 @@
               style="display: inline-block; position: absolute; right: 20px; cursor: pointer"
               @click="goToBackendProject"
             >
-              {{ backendVersion }}
+              <span :style="{ color: ping === -1 ? 'red' : '#333' }">
+                {{ backendVersion }}
+              </span>
+              <span
+                v-if="ping && ping !== -1"
+                :style="{ fontSize: '12px', color: ping < 300 ? 'green' : ping < 600 ? 'orange' : 'red' }"
+              >
+                {{ ping }}ms
+              </span>
             </div>
           </div>
           <el-container>
@@ -40,6 +48,7 @@
                   filterable
                   placeholder="请选择"
                   style="width: 100%"
+                  @change="backendChange"
                 >
                   <el-option
                     v-for="item in options.backendOptions"
@@ -171,6 +180,7 @@ const project = process.env.VUE_APP_PROJECT;
 const backendProject = process.env.VUE_APP_BACKEND_PROJECT;
 const gayhubRelease = process.env.VUE_APP_BACKEND_RELEASE;
 const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/sub?";
+// const defaultBackend = "https://jp.aws.7revor.com/proxy/subconverter/sub?";
 // const defaultConfig = process.env.VUE_APP_SUBCONVERTER_DEFAULT_CONFIG;
 const defaultConfig = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini";
 export default {
@@ -326,6 +336,8 @@ export default {
       uploadPassword: "",
 
       needUdp: false, // 是否需要添加 udp 参数
+
+      ping: "", // 服务器延迟
     };
   },
   created() {
@@ -444,11 +456,26 @@ export default {
         return candidate.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
       };
     },
+    backendChange() {
+      this.getBackendVersion();
+    },
     getBackendVersion() {
-      this.$axios.get(defaultBackend.substring(0, defaultBackend.length - 5) + "/version").then((res) => {
-        this.backendVersion = res.data.replace(/backend\n$/gm, "");
-        this.backendVersion = this.backendVersion.replace("subconverter", "");
-      });
+      this.backendVersion = "";
+      this.ping = "";
+      const start = new Date().getTime();
+      const backend = this.form.customBackend;
+      this.$axios
+        .get(backend.substring(0, backend.length - 5) + "/version")
+        .then((res) => {
+          const end = new Date().getTime();
+          this.backendVersion = res.data.replace(/backend\n$/gm, "");
+          this.backendVersion = this.backendVersion.replace("subconverter", "");
+          this.ping = end - start;
+        })
+        .catch((err) => {
+          this.backendVersion = err.message;
+          this.ping = -1;
+        });
     },
     saveSubUrl() {
       if (this.form.sourceSubUrl !== "") {
