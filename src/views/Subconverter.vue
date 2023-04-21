@@ -14,7 +14,7 @@
               </span>
               <span
                 v-if="ping && ping !== -1"
-                :style="{ fontSize: '12px', color: ping < 300 ? 'green' : ping < 600 ? 'orange' : 'red' }"
+                :style="{ fontSize: '12px', color: ping < 1000 ? 'green' : ping < 3000 ? 'orange' : 'red' }"
               >
                 {{ ping }}ms
               </span>
