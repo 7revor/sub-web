@@ -150,6 +150,18 @@
                   >
                 </el-input>
               </el-form-item>
+              <el-form-item label="订阅短链:">
+                <el-input class="copy-content" disabled v-model="customShortSubUrl">
+                  <el-button
+                    slot="append"
+                    v-clipboard:copy="customShortSubUrl"
+                    v-clipboard:success="onCopy"
+                    ref="copy-btn"
+                    icon="el-icon-document-copy"
+                    >复制</el-button
+                  >
+                </el-input>
+              </el-form-item>
               <el-form-item label-width="0px" style="margin-top: 40px; text-align: center">
                 <el-button
                   style="width: 120px"
@@ -158,7 +170,16 @@
                   :disabled="form.sourceSubUrl.length === 0"
                   >生成订阅链接</el-button
                 >
+                <el-button
+                  style="width: 120px"
+                  type="danger"
+                  @click="makeShortUrl"
+                  :loading="loading"
+                  :disabled="customSubUrl.length === 0"
+                  >生成短链接</el-button
+                >
               </el-form-item>
+
               <el-form-item label-width="0px" style="text-align: center">
                 <el-button
                   style="width: 120px"
@@ -181,9 +202,8 @@
 const project = process.env.VUE_APP_PROJECT;
 const backendProject = process.env.VUE_APP_BACKEND_PROJECT;
 const gayhubRelease = process.env.VUE_APP_BACKEND_RELEASE;
-const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/sub?";
-// const defaultBackend = "https://jp.aws.7revor.com/proxy/subconverter/sub?";
-// const defaultConfig = process.env.VUE_APP_SUBCONVERTER_DEFAULT_CONFIG;
+const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/subconverter/sub?";
+const shortUrlBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/short/create";
 const defaultConfig = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini";
 export default {
   data() {
@@ -332,6 +352,7 @@ export default {
 
       loading: false,
       customSubUrl: "",
+      customShortSubUrl: "",
 
       loadConfig: "",
       uploadConfig: "",
@@ -374,7 +395,7 @@ export default {
       }
 
       const url = "clash://install-config?url=";
-      window.open(url + encodeURIComponent(this.customSubUrl));
+      window.open(url + encodeURIComponent(this.customShortSubUrl !== "" ? this.customShortSubUrl : this.customSubUrl));
     },
     surgeInstall() {
       if (this.customSubUrl === "") {
@@ -453,10 +474,35 @@ export default {
       this.$copyText(this.customSubUrl);
       this.$message.success("定制订阅已复制到剪贴板");
     },
-    createFilter(queryString) {
-      return (candidate) => {
-        return candidate.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
-      };
+    makeShortUrl() {
+      if (this.customSubUrl === "") {
+        this.$message.warning("请先生成订阅链接，再获取对应短链接");
+        return false;
+      }
+
+      this.loading = true;
+      this.$axios
+        .post(
+          shortUrlBackend,
+          { target: this.customSubUrl },
+          {
+            header: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          this.customShortSubUrl = res.data.link;
+          this.$copyText(res.data.link);
+          this.$message.success("短链接已复制到剪贴板");
+        })
+        .catch((err) => {
+          const msg = err.response ? err.response.data.error : err.message;
+          this.$message.error("短链接获取失败：" + msg);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
     backendChange() {
       this.getBackendVersion();
