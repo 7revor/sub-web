@@ -239,7 +239,7 @@ export default {
                 value: "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.min.ini",
               },
               {
-                label: "7revor（自用）",
+                label: "7revor（自用全分组）",
                 value: "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.config.ini",
               },
             ],
