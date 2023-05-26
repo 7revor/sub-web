@@ -240,7 +240,7 @@ export default {
               },
               {
                 label: "7revor（自用精简多机场备选）",
-                value: "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.min.ini",
+                value: "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.multi.min.ini",
               },
               {
                 label: "7revor（自用全分组）",
