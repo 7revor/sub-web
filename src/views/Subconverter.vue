@@ -342,6 +342,7 @@ export default {
         extraset: false,
         sort: false,
         udp: false,
+        nodeList: false,
         tfo: false,
         scv: true,
         fdn: false,
