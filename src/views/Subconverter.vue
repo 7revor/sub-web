@@ -206,7 +206,7 @@ const backendProject = process.env.VUE_APP_BACKEND_PROJECT;
 const gayhubRelease = process.env.VUE_APP_BACKEND_RELEASE;
 const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/subconverter/sub?";
 const shortUrlBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/short/create";
-const defaultConfig = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini";
+const defaultConfig = "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.min.ini";
 export default {
   data() {
     return {
