@@ -237,16 +237,12 @@ export default {
             label: "CUSTOMIZED",
             options: [
               {
-                label: "7revor（自用精简）",
+                label: "7revor（自用）",
                 value: "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.min.ini",
               },
               {
-                label: "7revor（自用精简 多机场备选）",
+                label: "7revor（自用 多机场备选）",
                 value: "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.multi.min.ini",
-              },
-              {
-                label: "7revor（自用全分组）",
-                value: "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.config.ini",
               },
             ],
           },
