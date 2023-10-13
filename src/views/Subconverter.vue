@@ -132,8 +132,6 @@
                 </el-form-item>
               </div>
 
-              <el-checkbox v-model="form.proxy" label="使用代理拉取订阅（获取不到节点时请尝试勾选）" border />
-
               <div style="margin-top: 50px"></div>
 
               <el-divider content-position="center">
@@ -334,7 +332,6 @@ export default {
         includeRemarks: "",
         filename: "",
         emoji: false,
-        proxy: false,
         extraset: false,
         sort: false,
         udp: false,
@@ -423,13 +420,6 @@ export default {
 
       let sourceSub = this.form.sourceSubUrl;
       sourceSub = sourceSub.replace(/(\n|\r|\n\r)/g, "|");
-      // 使用订阅代理
-      if (this.form.proxy) {
-        sourceSub = sourceSub
-          .split("|")
-          .map((url) => `https://proxy.7revor.org/?url=${encodeURIComponent(url)}`)
-          .join("|");
-      }
 
       this.customSubUrl =
         backend +
