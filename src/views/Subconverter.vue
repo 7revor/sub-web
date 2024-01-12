@@ -204,7 +204,7 @@ const backendProject = process.env.VUE_APP_BACKEND_PROJECT;
 const gayhubRelease = process.env.VUE_APP_BACKEND_RELEASE;
 const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/subconverter/sub?";
 const shortUrlBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/short/create";
-const defaultConfig = "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.min.ini";
+const defaultConfig = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini";
 export default {
   data() {
     return {
@@ -237,10 +237,6 @@ export default {
               {
                 label: "7revor（自用）",
                 value: "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.min.ini",
-              },
-              {
-                label: "7revor（自用 多机场备选）",
-                value: "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.multi.min.ini",
               },
             ],
           },
