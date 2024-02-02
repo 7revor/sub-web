@@ -39,7 +39,7 @@ jobs:
           # scp password
           password: ${{ secrets.PWD }}
           # target path on the server, must be a directory path.
-          target: /root/deploy/sub-web
+          target: /deploy/sub-web
           # scp file list
           source: dist
           # remove target folder before upload data
