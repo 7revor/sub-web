@@ -423,7 +423,7 @@ export default {
       if (this.form.proxy) {
         sourceSub = sourceSub
           .split("|")
-          .map((url) => `https://proxy.7revor.org/?url=${encodeURIComponent(url)}`)
+          .map((url) => `https://proxy.kikyo.icu/?url=${encodeURIComponent(url)}`)
           .join("|");
       }
 
