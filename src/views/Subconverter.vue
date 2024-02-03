@@ -206,7 +206,7 @@ const backendProject = process.env.VUE_APP_BACKEND_PROJECT;
 const gayhubRelease = process.env.VUE_APP_BACKEND_RELEASE;
 const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/subconverter/sub?";
 const shortUrlBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/short/create";
-const defaultConfig = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini";
+const defaultConfig = "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.lite.ini";
 export default {
   data() {
     return {
@@ -236,6 +236,10 @@ export default {
           {
             label: "CUSTOMIZED",
             options: [
+              {
+                label: "7revor（精简）",
+                value: "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.lite.ini",
+              },
               {
                 label: "7revor（自用）",
                 value: "https://raw.githubusercontent.com/7revor/proxy-rules/main/subconverter.min.ini",
@@ -423,7 +427,13 @@ export default {
       if (this.form.proxy) {
         sourceSub = sourceSub
           .split("|")
-          .map((url) => `https://proxy.7revor2335244.workers.dev/?url=${encodeURIComponent(url)}`)
+          .map((url) => {
+            if (url.startsWith("http")) {
+              return `https://proxy.7revor2335244.workers.dev/?url=${encodeURIComponent(url)}`;
+            } else {
+              return url;
+            }
+          })
           .join("|");
       }
 
