@@ -231,7 +231,7 @@ export default {
           ClashR: "clashr",
           Surge2: "surge&ver=2",
         },
-        backendOptions: [{ label: "api.7revor.com（三网BGP优化）", value: defaultBackend }],
+        backendOptions: [{ label: "api.7revor.com", value: defaultBackend }],
         remoteConfig: [
           {
             label: "CUSTOMIZED",
