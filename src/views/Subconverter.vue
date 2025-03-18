@@ -231,7 +231,7 @@ export default {
           ClashR: "clashr",
           Surge2: "surge&ver=2",
         },
-        backendOptions: [{ label: "api.7revor.com", value: defaultBackend }],
+        backendOptions: [{ label: "https://api.7revor.com", value: defaultBackend }],
         remoteConfig: [
           {
             label: "CUSTOMIZED",
