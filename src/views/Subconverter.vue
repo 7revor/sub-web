@@ -429,7 +429,7 @@ export default {
           .split("|")
           .map((url) => {
             if (url.startsWith("http")) {
-              return `https://proxy.7revor2335244.workers.dev/?url=${encodeURIComponent(url)}`;
+              return `https://pfetch.k1kyo.com/?url=${encodeURIComponent(url)}`;
             } else {
               return url;
             }
