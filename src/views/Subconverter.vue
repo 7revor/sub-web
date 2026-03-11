@@ -219,6 +219,7 @@ export default {
           Clash: "clash",
           Surge3: "surge&ver=3",
           Surge4: "surge&ver=4",
+          Surge5: "surge&ver=5",
           Quantumult: "quan",
           QuantumultX: "quanx",
           Surfboard: "surfboard",
@@ -230,6 +231,7 @@ export default {
           ssd: "ssd",
           ClashR: "clashr",
           Surge2: "surge&ver=2",
+          Singbox: "singbox",
         },
         backendOptions: [{ label: "https://api.k1kyo.com", value: defaultBackend }],
         remoteConfig: [
@@ -508,7 +510,7 @@ export default {
             header: {
               "Content-Type": "application/json",
             },
-          }
+          },
         )
         .then((res) => {
           this.customShortSubUrl = res.data.link;
